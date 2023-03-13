@@ -25,21 +25,15 @@
     </form>
 
     <?php
+    include_once(__DIR__. "/functions.php");
+
       if(isset($_GET['passwordLength'])) {
         $passwordLength = $_GET['passwordLength'];
         $password = generateRandomPassword($passwordLength);
         echo "<h3>La tua password causale è: $password</h3>";
       }
       
-      function generateRandomPassword($length) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+=-{}[]|\:;"<>,.?/';
-        $password = '';
-        $charactersLength = strlen($characters);
-        for ($i = 0; $i < $length; $i++) {
-          $password .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $password;
-      }     
+      
     ?>
   </div>
 </body>
