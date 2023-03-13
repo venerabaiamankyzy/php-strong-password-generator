@@ -22,17 +22,21 @@
         <br>
         <input type="submit" class="btn btn-primary mt-3" value="Genera password casuale">
       </div>
-    </form>
 
-    <?php
+  </div>
+  </form>
+
+  <?php
     include_once(__DIR__. "/functions.php");
-
+     
       if(isset($_GET['passwordLength'])) {
         $passwordLength = $_GET['passwordLength'];
         $password = generateRandomPassword($passwordLength);
-        echo "<h3>La tua password causale è: $password</h3>";
-      }
-      
+        
+        session_start();
+        $_SESSION['password'] = $password;
+        header('Location: password.php');
+      }    
       
     ?>
   </div>
