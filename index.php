@@ -14,15 +14,33 @@
 
 <body>
   <div class=container>
-    <h1>Generatore di password causale</h1>
-    <form action="index.php" method="GET" class="row g-3">
+    <h1 class="text-center mt-5">Generatore di password causale</h1>
+    <form action="index.php" method="get" class="row g-5 justify-content-center">
       <div class="col-auto">
         <label for="passwordLength" id="passwordLength">Lunghezza della password:</label>
         <input type="number" name="passwordLength" min="1" max="50" required>
         <br>
-        <button type="button" class="btn btn-primary mt-3">Genera password casuale</button>
+        <input type="submit" class="btn btn-primary mt-3" value="Genera password casuale">
       </div>
     </form>
+
+    <?php
+      if(isset($_GET['passwordLength'])) {
+        $passwordLength = $_GET['passwordLength'];
+        $password = generateRandomPassword($passwordLength);
+        echo "<h3>La tua password causale è: $password</h3>";
+      }
+      
+      function generateRandomPassword($length) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+=-{}[]|\:;"<>,.?/';
+        $password = '';
+        $charactersLength = strlen($characters);
+        for ($i = 0; $i < $length; $i++) {
+          $password .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $password;
+      }     
+    ?>
   </div>
 </body>
 
